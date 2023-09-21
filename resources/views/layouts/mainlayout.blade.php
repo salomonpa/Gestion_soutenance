@@ -14,7 +14,7 @@
             </div>
             <div class="col-lg-10 text-center mb-5">
                 @yield('content')
-                <h1>a propos de nous</h1>
+              
             </div>
         
         
