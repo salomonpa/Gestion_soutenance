@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('juries_id')->unsigned();
             $table->foreign('juries_id')->references('id')->on('juries')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('salles_id')->unsigned();
-            $table->foreign('sales_id')->references('id')->on('salles')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('salles_id')->references('id')->on('salles')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('demandes_id')->unsigned();
             $table->foreign('demandes_id')->references('id')->on('demandes')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('users_id')->unsigned();
