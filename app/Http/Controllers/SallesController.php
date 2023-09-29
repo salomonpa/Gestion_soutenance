@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Salle;
+
 
 class SallesController extends Controller
 {
@@ -12,7 +14,8 @@ class SallesController extends Controller
      */
     public function index()
     {
-        //
+        $salle = Salle::all();
+        return view('salles.liste', compact('salle'));
     }
 
     /**
@@ -20,7 +23,7 @@ class SallesController extends Controller
      */
     public function create()
     {
-        //
+        return view('salles.ajout');
     }
 
     /**
@@ -28,7 +31,16 @@ class SallesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $salles = new Salle();
+        $salles->libelle = $request->libelle;
+       
+       
+
+        $salles->save();
+    
+        return redirect()->route('salles.index')->with('status', 'salle a été ajouté avec succes.');
+       
     }
 
     /**
@@ -36,7 +48,12 @@ class SallesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('salles.details',[
+
+            'salle' => Salles::find($id)
+
+        ]);
+
     }
 
     /**
@@ -44,7 +61,8 @@ class SallesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $salles = salle::find($id);
+        return view('salles.modifier', compact('salles'));
     }
 
     /**
@@ -52,7 +70,17 @@ class SallesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $salles = salle::find($id);
+            
+
+        $etudiants->update([
+            'libelle'=>$request->libelle,
+            
+           
+        ]);
+
+        return redirect()->route('salles.index')->with('status', 'salle a été ajouté avec succes.');
+       
     }
 
     /**
@@ -60,6 +88,9 @@ class SallesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $salles = salle::find($id);
+        $salles->delete();
+        return redirect()->route('salles.index')->with('status', ' La salle a été supprimé avec succes.');
+
     }
 }

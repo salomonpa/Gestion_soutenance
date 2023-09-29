@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Maitrestage;
 
 class MaitrestageController extends Controller
 {
@@ -12,7 +13,8 @@ class MaitrestageController extends Controller
      */
     public function index()
     {
-        //
+        $maitrestage = Maitrestage::all();
+        return view('maitrestages.liste', compact('maitrestage'));
     }
 
     /**
@@ -20,7 +22,7 @@ class MaitrestageController extends Controller
      */
     public function create()
     {
-        //
+        return view('maitrestages.ajout');
     }
 
     /**
@@ -28,7 +30,26 @@ class MaitrestageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nom'=>'required',
+            'prenom'=>'required',
+            'telephone'=>'required',
+            'email'=>'required',
+            'fonction'=>'required',
+            
+            
+        ]);
+        $maitrestages = new Maitrestage();
+        $maitrestages->nom = $request->nom;
+        $maitrestages->prenom = $request->prenom;
+        $maitrestages->telephone = $request->telephone;
+        $maitrestages->email = $request->email;
+        $maitrestages->fonction = $request->fonction;
+
+        $maitrestages->save();
+    
+        return redirect()->route('maitrestage.index')->with('status', 'Maitre de stage a été ajouté avec succes.');
+    
     }
 
     /**
@@ -36,15 +57,21 @@ class MaitrestageController extends Controller
      */
     public function show(string $id)
     {
-        //
+        return view('maitrestages.details',[
+
+            ' maitrestage' => Maitrestage::find($id)
+
+        ]);;
     }
+    
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        $maitrestage = maitrestage::find($id);
+        return view('maitrestage.modifier', compact('maitrestage'));
     }
 
     /**
@@ -52,7 +79,20 @@ class MaitrestageController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $maitrestage = maitrestage::find($id);
+            
+
+        $maitrestage->update([
+            'nom'=>$request->nom,
+            'prenom'=>$request->prenom,
+            'telephone'=>$request->telephone,
+            'email'=>$request->email,
+            'fonction'=>$request->fonction,
+               
+        ]);
+    
+        return redirect()->route('maitrestage.index')->with('status', 'maitre de stage a été modifié avec succes.');
+       
     }
 
     /**
@@ -60,6 +100,9 @@ class MaitrestageController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $maitrestages = maitrestage::find($id);
+        $maitrestages->delete();
+        return redirect()->route('maitrestage.index')->with('status', 'maitre de stage a été supprimé avec succes.');
+
     }
 }

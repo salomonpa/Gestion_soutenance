@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Soutenance extends Model
 {
+    protected $guarded = [
+
+    ];
     use HasFactory;
 }

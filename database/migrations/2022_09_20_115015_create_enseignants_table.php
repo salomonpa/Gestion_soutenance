@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('prenom'); 
             $table->Integer('telephone');
             $table->string('email');
-            $table->string('fonction');
+            $table->string('matiere');
             $table->timestamps();
         });
     }

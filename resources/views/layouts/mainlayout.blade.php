@@ -1,28 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    @include('layouts.style')
+  @include('layouts.style')
 </head>
+
 <body>
-    @include('require.header')
 
-    <section class="">
-        
-            <div class="col-lg-2 bg-primary" style="height: 80%">
-                
-                @include('require.sidebar')
-            </div>
-            <div class="col-lg-10 text-center mb-5">
-                @yield('content')
-              
-            </div>
-        
-        
-     </section>
-            @include('layouts.script')
-       
-         @include('require.footer')
+  <!-- ======= Header ======= -->
+  <!-- End Header -->
+  @include('require.header')
 
+  <!-- ======= Sidebar ======= -->
+  @include('require.sidebar')
+  <!-- End Sidebar-->
 
-        </body>
+  <main id="main" class="main">
+
+    @yield('content')
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+  @include('require.footer')
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  @include('layouts.script')
+
+</body>
+
 </html>

@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Demande;
+use Illuminate\Http\only;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+
+
 
 class DemandesController extends Controller
 {
@@ -12,7 +16,9 @@ class DemandesController extends Controller
      */
     public function index()
     {
-        //
+        $demandes = Demande::all();
+        return view('demande.liste', compact('demandes'));
+
     }
 
     /**
@@ -20,7 +26,7 @@ class DemandesController extends Controller
      */
     public function create()
     {
-        //
+        return view('demande.ajout');
     }
 
     /**
@@ -28,7 +34,33 @@ class DemandesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+    
+        $demandes = new Demande();
+        $demandes->motif = $request->motif;
+        $demandes->statut = $request->statut;
+        $demandes->periode_soutenance = $request->periode_soutenance;
+        $demandes->heure_soutenance = $request->heure_soutenance;
+        
+        $demande->save();
+    
+        return redirect()->route('demandes.index')->with('status', 'demande a été ajouté avec succes.');
+       
+
+
+    }
+    public function store_approuve_traitement(Request $request, $id)
+    {
+       $demandes = Demande::find($id);
+
+       $demandes->store_approuve_traitement([
+           'motif' => $request->motif,
+           'statut' => $request->statut,
+           'periode_soutenance' => $request->periode_soutenance,
+           'heure_soutenance' => $request->heure_soutenance,
+
+
+       ]);
+       return redirect()->route('demandes.store')->with('status', 'le statut de la demande a bien été approuvé ');
     }
 
     /**

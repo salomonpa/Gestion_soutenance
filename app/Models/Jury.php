@@ -7,5 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Jury extends Model
 {
+    protected $guarded = [
+
+    ];
     use HasFactory;
 }

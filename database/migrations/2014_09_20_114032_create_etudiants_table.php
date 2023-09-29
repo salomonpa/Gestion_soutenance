@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom'); 
-            $table->integer('telephone');
+            $table->string('date_naiss');
             $table->string('email');
+            $table->string('niveau_etude');
             $table->string('filiere');
+            $table->string('photo_etudiant');
             $table->timestamps();
         });
     }
