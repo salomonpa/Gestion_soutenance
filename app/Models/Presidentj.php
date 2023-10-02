@@ -10,5 +10,7 @@ class Presidentj extends Model
     protected $guarded = [
 
     ];
-    use HasFactory;
+    function Jury(){
+        return $this->hasOne(Jury::class);
+}
 }

@@ -72,7 +72,7 @@
                           <i class=""></i>
                         </div>
                         <div class="ps-3">
-                          <h6>12</h6>
+                          <h6>{{ '' }}</h6>
 
 
                         </div>

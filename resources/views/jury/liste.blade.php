@@ -8,20 +8,20 @@ LISTE JURY                                                                      
     <thead>
       <tr>
         <th scope="col">N°</th>
-        <th scope="col">nom enseignant</th>
-        <th scope="col">nom dm</th>
-        <th scope="col">nom ms</th>
-        <th scope="col">nom president</th>
-        <th scope="col">Action</th>
+        <th scope="col">Enseignant</th>
+        <th scope="col"></th>Directeur de memoire
+        <th scope="col">Maitre de stage</th>
+        <th scope="col">Président de Jury</th>
+        <th scope="col">Actions</th>
       </tr>
     </thead>
     @foreach ($jury as $jur)
               <tr>
                   <td>{{ $jur->id }}</td>
-                  <td>{{ $jur->enseignant->nom }} {{ $jur->enseignant->prenom }}</td>
-                  <td>{{ $jur->directeurmemoire->nom_directeurmemoire }}</td>
-                  <td>{{ $jur->maitrestage->nom_maitrestage }}</td>
-                  <td>{{ $jur->presidentj->nom_preseidentj}}</td>
+                  <td>{{ $jur->enseignant->nom  }} {{ $jur->enseignant->prenom }}</td>
+                  <td>{{ $jur->directeurmemoire->nom}} {{ $jur->directeurmemoire->prenom}}</td>
+                  <td>{{ $jur->maitrestage->nom}} {{ $jur->maitrestage->prenom}}</td>
+                  <td>{{ $jur->presidentj->nom}} {{ $jur->presidentj->prenom}}</td>
 
                   {{-- <img src="{{asset('storage') . '/' . $etud->image}}" class="" alt="..."> --}}
                   <td>

@@ -25,31 +25,44 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">N</th>
+                  <th scope="col">N°</th>
+                  <th scope="col">statut</th>
                   <th scope="col">Motif</th>
-                  <th scope="col">Statut</th>
                   <th scope="col">Preriode de soutenance</th>
-                  <th scope="col">Heure de soutenance</th>
+                  <th scope="col">Etudiant</th>
+                  <th scope="col">Actions</th>
                  
                 </tr>
               </thead>
               <tbody>
                 <tbody>
-                  @foreach ($demandes as $demand)
+                  @foreach ($demandes as $demande)
                   <tr>
-                    <td>{{ $demand->id }}</td>
-                    <td>{{ $demand->motif }}</td>
-                    <td>{{ $demand->statut }}</td>
-                    <td>{{ $demand->periode_soutenance }}</td>
-                    <td>{{ $demand->heure_soutenance }}</td>
+                    <td>{{ $demande->id }}</td>
+                    <td>{{ $demande->statut }}</td>
+                    <td>{{ $demande->date }}</td>
+                    <td>{{ $demande->periode}}</td>
+                    <td>{{ $demande->etudiant->nom }} {{ $demande->etudiant->prenom }}</td>
 
                     <td>          
-                      <a href="{{ route('demande.show', $demand->id ) }}" class="btn btn-success"><i class="bi bi-eye" title="détails"></i></a>
-                      <a href="{{ route('demande.edit', $demand->id ) }}" class="btn btn-info"><i class="bi bi-pencil-square" title="modifier"></i></a>
-                      <a href="{{ url('supprimer-demandes/' .$demand->id) }}" class="btn btn-danger"> <i class="bi bi-trash"></i></a>                   
-                  </td>
-                   
-            
+                      @if (Auth::user()->roles_id == '1')
+                      @elseif (Auth::user()->roles_id == '2')
+                      <a href="{{ route('demande.edit', $demandes->id) }}" > <i class="bi bi-pencil-square"></i></a>
+                     
+  
+                      @else
+  
+                      @endif 
+  
+                      @if (Auth::user()->roles_id == '3')
+                      <a href="{{ url('supprimer-demande/' .$demande->id)}}"> <i class="bi bi-trash"></i></a>
+                      @else
+  
+                      @endif 
+  
+                    </td>
+                  </tr>
+                  
                   @endforeach
               
               </tbody>

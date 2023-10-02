@@ -6,6 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Directeurmemoire extends Model
+
 {
-    use HasFactory;
+    protected $guarded = [
+
+    ];
+    function Jury(){
+        return $this->hasOne(Jury::class);
+}
 }

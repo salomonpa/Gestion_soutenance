@@ -13,10 +13,11 @@ return new class extends Migration
     {
         Schema::create('demandes', function (Blueprint $table) {
             $table->id();
-           $table->string('motif'); 
+            $table->string('code'); 
             $table->string('statut');
-            $table->datetime('periode_soutenance');
-            $table->string('heure_soutenace');
+            $table->string('date');
+            $table->string('periode');
+            $table->string('motif')->nullable();
             $table->unsignedBigInteger('etudiants_id')->unsigned();
             $table->foreign('etudiants_id')->references('id')->on('etudiants')->onDelete('cascade')->onUpdate('cascade');
            

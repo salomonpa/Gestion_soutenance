@@ -32,6 +32,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
     
 });
+Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
 
 Route::post('/login',[AuthController::class, 'login'] )->name('login');
 Route::get('/logout',[AuthController::class, 'logout'] )->name('logout');

@@ -13,10 +13,7 @@ return new class extends Migration
     {
         Schema::create('juries', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
            
-            $table->unsignedBigInteger('users_id')->unsigned();
-            $table->foreign('users_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('enseignants_id')->unsigned();
             $table->foreign('enseignants_id')->references('id')->on('enseignants')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('directeurmemoires_id')->unsigned();

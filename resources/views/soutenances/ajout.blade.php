@@ -20,48 +20,51 @@
           </div>
         </div>
         <div class="col-md-4">
-          <label for="validationCustomUsername" class="form-label">Statut</label>
+          <label for="validationCustomUsername" class="form-label">Thème</label>
           <div class="input-group has-validation">
             <input type="text" class="form-control" id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
             <div class="invalid-feedback">
-              Please choose a username.
+           
             </div>
           </div>
         </div>
         <div class="col-md-6">
-          <label for="validationCustom03" class="form-label">Jury</label>
-          <select class="form-select" id="validationCustom04" required>
-            <option selected disabled value="">Choose...</option>
-            <option>...</option>
+          <label for="inputHeuresoutenace" class="form-label">Jury</label>
+          <select class="form-control" name="etudiants_id">
+
+              <option>Selectionner un jury</option>;
+              @foreach ( $juries as $jur)
+                  <option value="{{ $jur->id}}"> </option>
+                 
+              @endforeach
           </select>
-        </div>
-        <div class="col-md-6">
-          <label for="validationCustom03" class="form-label">Salles</label>
-          <select class="form-select" id="validationCustom04" required>
-            <option selected disabled value="">Choose...</option>
-            <option>...</option>
-          </select>
-          <div class="invalid-feedback">
-            Please select a valid state.
+
+      </div>
+
+      <div class="col-md-6">
+        <label for="inputSalle" class="form-label">Salles</label>
+        <select class="form-control" name="etudiants_id">
+
+            <option>Selectionner une salle</option>
+            @foreach ( $salles as $sal)
+                <option value="{{ $sa->id }}">
+                </option>
+            @endforeach
+        </select>
+
+    </div>
+    <div class="col-md-6">
+      <label for="inputDemande" class="form-label">Demande</label>
+      <select class="form-control" name="demandes_id">
+
+          <option>Selectionner une demande</option>;
+          @foreach ( $demandes as $demand)
+              <option value="{{ $demand->id }}">{{ $demand->nom }} {{ $demand->prenom }}
+              </option>
+          @endforeach
+      </select>
           </div>
-        </div>
-        <div class="col-md-6">
-            <label for="validationCustom03" class="form-label">Demande</label>
-            <select class="form-select" id="validationCustom04" required>
-              <option selected disabled value="">Choose...</option>
-              <option>...</option>
-            </select>
-            <div class="invalid-feedback">
-              Please select a valid state.
-            </div>
-          </div>
-          <div class="col-md-6">
-            <label for="validationCustom03" class="form-label">Utilisateur</label>
-            <select class="form-select" id="validationCustom04" required>
-              <option selected disabled value="">Choose...</option>
-              <option>...</option>
-            </select>
-          </div>
+         
         <div class="col-12">
           <button class="btn btn-primary" type="submit">Ajouter soutenance</button>
         </div>

@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Demande;
-use Illuminate\Http\only;
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Etudiant;
 
 
 
@@ -26,42 +27,69 @@ class DemandesController extends Controller
      */
     public function create()
     {
-        return view('demande.ajout');
+        $etudiants = Etudiant::all();
+        return view('demande.ajout', compact('etudiants'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
+
     {
-    
-        $demandes = new Demande();
-        $demandes->motif = $request->motif;
-        $demandes->statut = $request->statut;
-        $demandes->periode_soutenance = $request->periode_soutenance;
-        $demandes->heure_soutenance = $request->heure_soutenance;
+        demande::create([
+            'code'=> $request-> code,
+            'statut'=> $request-> statut,
+            'date'=> $request-> date,
+            'periode'=> $request-> periode,
+            'etudiants_id'=> $request-> etudiants_id,
+        ]);
+        // $request->validate([
+
+            
+
+        // ]);
+
+        // $demandes = new demande();
+        // $demandes->libelle = $request->libelle;
+        // $demandes->titre = $request->titre;
+        // $demandes->resume = $request->resume;
+        // $demandes->date = $request->date;
+        // $demandes->periode = $request->periode;
+        // $demandes->etudiants_id = $request->etudiants_id;
         
-        $demande->save();
-    
-        return redirect()->route('demandes.index')->with('status', 'demande a été ajouté avec succes.');
+        // $demandes->save();
+
+        return redirect()->route('demande.index')->with('status', 'Une demande a  été ajoutée avec succes.');
+
        
 
 
     }
-    public function store_approuve_traitement(Request $request, $id)
-    {
-       $demandes = Demande::find($id);
 
-       $demandes->store_approuve_traitement([
-           'motif' => $request->motif,
-           'statut' => $request->statut,
-           'periode_soutenance' => $request->periode_soutenance,
-           'heure_soutenance' => $request->heure_soutenance,
+    
+    //    $demandes = Demande::find($id);
+    //    $etudiant = Etudiant::all();
 
+    //    ([
+    //        'motif' => $request->motif,
+    //        'statut' => $request->statut,
+    //        'periode_soutenance' => $request->periode_soutenance,
+    //        'heure_soutenance' => $request->heure_soutenance,
+    //        'etudiant'=>$request->etudiant,
+    //     ]);
+    //        $demande = new Demande();
+    //        $demande->motif = $request->motif;
+    //        $demande->statut = $request->statut;
+    //        $demande->periode_soutenance = $request->periode_soutenance;
+    //        $demande->heure_soutenance = $request->heure_soutenance;
+    //        $demande->etudiant = $request->etudiant;
+           
+    //        $demandes->save();
+       
+    //        return redirect()->route('demande.index')->with('status', 'demande a été ajouté avec succes.');        
+     
 
-       ]);
-       return redirect()->route('demandes.store')->with('status', 'le statut de la demande a bien été approuvé ');
-    }
 
     /**
      * Display the specified resource.
@@ -76,7 +104,10 @@ class DemandesController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $etudiants = etudiant::all();
+        $demandes = demande::find($id);
+        return view('demande.modifier',compact('demandes', 'etudiants'));
+
     }
 
     /**
@@ -84,7 +115,15 @@ class DemandesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $demandes = demande::find($id);
+
+        $demandes->update([
+            'statut' => $request->statut,
+            'motif' => $request->motif,
+        ]);
+
+        return redirect()->route('demande.index')->with('status', 'Une demande a  été modifié avec succes.');
+
     }
 
     /**
@@ -92,6 +131,9 @@ class DemandesController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $demandes = demande::find($id);
+        $demandes->delete();
+        return redirect()->route('enseignants.index')->with('status', 'Une demande a  été supprimée avec succes.');
+
     }
 }
